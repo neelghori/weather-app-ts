@@ -1,0 +1,97 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css);
+
+.widget {
+  position: relative;
+  width: 700px;
+  height: 310px;
+  margin: 50px auto;
+  background-color: #fcfdfd;
+  border-radius: 9px;
+  padding: 37px;
+  padding-right: 30px;
+  box-shadow: 0px 31px 35px -26px #080c21;
+}
+.night {
+  background-color: #000;
+  color: #fff;
+}
+.night .city {
+  color: #fff;
+}
+.night .date {
+  color: #fff;
+}
+.night .temp {
+  color: #fff;
+}
+.white {
+  background-color: #fff;
+  color: #000;
+}
+.yellow {
+  background-color: yellow;
+  color: #000;
+}
+.date {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.city {
+  font-size: 21px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 5px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.temp {
+  font-size: 81px;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 100;
+}
+.forecast {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding-top: 10px;
+}
+
+.panel {
+  display: inline-block;
+}
+
+.right-panel {
+  position: absolute;
+  float: right;
+  top: 0;
+  margin-top: 62px;
+  padding-left: 200px;
+}
+.right-panel h1 {
+  font-size: 80px;
+  padding-left: 30px;
+  margin: 55px 63px;
+}
+.icons {
+  display: flex;
+  justify-content: flex-end;
+}
+.edit-btn {
+  font-size: 20px;
+  margin: -7px -12px;
+  padding: 0px 30px;
+  border-radius: 250px;
+  background: none;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+.night .edit-btn {
+  color: #fff;
+}
+.white .edit-btn,
+.yellow .edit-btn {
+  color: #000;
+}
