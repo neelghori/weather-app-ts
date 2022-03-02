@@ -4,6 +4,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Weather from "./component/Weather";
 import WeatherCard from "./component/WeatherCard";
 import { weather_app } from "./component/WeatherForm";
+import WeatherData from "./component/WeatherData";
 import "react-toastify/dist/ReactToastify.css";
 
 export type sendProps = {
@@ -15,10 +16,10 @@ export type sendProps = {
   tempUnits: string;
   foreCasting: string;
   icon: string;
-}[];
+};
 const App = () => {
   const [Datas, setDatas] = useState(weather_app);
-  const [originalArray, setOriginalArray] = useState<sendProps>(Datas);
+  const [originalArray, setOriginalArray] = useState<sendProps[]>(Datas);
 
   const originalArr = (arry: []) => {
     setOriginalArray(arry);
@@ -53,6 +54,11 @@ const App = () => {
             />
           }
         />
+        <Route
+          path="/WeatherData/:weatherId"
+          element={<WeatherData originalData={originalArray} />}
+        />
+
         <Route path="/" element={<Navigate replace to="/" />} />
       </Routes>
     </div>

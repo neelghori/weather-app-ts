@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
 import { sendProps } from "../App";
-type mapData = {
-  id: number;
-  cityName: string;
-  dates: string;
-  times: string;
-  tempeature: string;
-  tempUnits: string;
-  foreCasting: string;
-  icon: string;
-};
+import { confirmAlert } from "react-confirm-alert";
+import { toast } from "react-toastify";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const WeatherCard = (props: {
-  weatherData: sendProps;
+  weatherData: sendProps[];
   sendOriginalarray: Function;
 }) => {
   const [updateData, setUpdateData] = useState(props.weatherData);
@@ -23,17 +16,40 @@ const WeatherCard = (props: {
     //console.log(event.target.value);
     setCity(event.target.value);
   };
+  toast.configure();
   const showWeatherId = (index: number) => {
-    const findIndex = props.weatherData.findIndex((curelem: mapData) => {
-      return curelem.id === index;
+    confirmAlert({
+      title: "Are you sure you want to Delete this Weather",
+
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            const findIndex = props.weatherData.findIndex(
+              (curelem: sendProps) => {
+                return curelem.id === index;
+              }
+            );
+            const updateDatas = props.weatherData.splice(findIndex, 1);
+            const filterData = props.weatherData.filter(
+              (curelems: sendProps) => {
+                return updateDatas[0].id !== curelems.id;
+              }
+            );
+            console.log(filterData);
+            setUpdateData(filterData);
+            props.sendOriginalarray(filterData);
+            toast.success("Weather Is Deleted", { autoClose: 2000 });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return false;
+          },
+        },
+      ],
     });
-    const updateDatas = props.weatherData.splice(findIndex, 1);
-    const filterData = props.weatherData.filter((curelems: mapData) => {
-      return updateDatas[0].id !== curelems.id;
-    });
-    console.log(filterData);
-    setUpdateData(filterData);
-    props.sendOriginalarray(filterData);
   };
 
   return (
@@ -76,7 +92,7 @@ const WeatherCard = (props: {
       ) : (
         <ul>
           {updateData
-            .filter((val: mapData) => {
+            .filter((val: sendProps) => {
               //console.log(val.cityName);
               if (city === "") {
                 return val;
@@ -85,12 +101,14 @@ const WeatherCard = (props: {
               ) {
                 // console.log(val.cityName);
                 return val;
+              } else {
+                return "";
               }
             })
             .slice(0)
             .reverse()
 
-            .map((curelem: mapData) => {
+            .map((curelem: sendProps) => {
               return (
                 <Card
                   key={curelem.id}
